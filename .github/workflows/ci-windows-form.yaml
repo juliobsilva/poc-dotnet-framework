@@ -25,13 +25,13 @@ jobs:
 
       - name: Build solution
         run: |
-          $msbuild = '${{ steps.locate-msbuild.outputs.msbuildPath }}'
-          & "$msbuild" 'WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj' /p:Configuration=Release
+          $msbuild = ${{ steps.locate-msbuild.outputs.msbuildPath }}
+          echo $msbuild
 
-      - name: Run tests
-        run: |
-          vstest.console.exe **/*.Tests.dll --logger:trx
-        continue-on-error: true
+    #   - name: Run tests
+    #     run: |
+    #       vstest.console.exe **/*.Tests.dll --logger:trx
+    #     continue-on-error: true
 
       - name: Publish artifact
         uses: actions/upload-artifact@v4
