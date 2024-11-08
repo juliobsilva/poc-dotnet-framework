@@ -20,7 +20,8 @@ jobs:
       - name: Locate MSBuild
         id: locate-msbuild
         run: |
-          echo "msbuildPath=$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)" >> $GITHUB_OUTPUT
+          msbuildPath=$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
+          echo "msbuildPath=$msbuildPath" >> $GITHUB_OUTPUT
 
       - name: Build solution
         run: |
