@@ -27,9 +27,6 @@ jobs:
           $msbuild = '${{ steps.locate-msbuild.outputs.path }}'
           & "$msbuild" 'WindowsFormsApp/WindowsFormsApp.sln' /p:Configuration=Release
 
-      - name: Build solution
-        run: msbuild WindowsFormsApp/WindowsFormsApp.sln /p:Configuration=Release
-
       - name: Run tests
         run: |
           vstest.console.exe **/*.Tests.dll --logger:trx
