@@ -24,7 +24,7 @@ jobs:
 
       - name: Build solution
         run: |
-          $msbuild = '${{ steps.locate-msbuild.outputs.msbuildPath }}'
+          $msbuild = "${{ steps.locate-msbuild.outputs.msbuildPath }}"
           echo $msbuild
 
     #   - name: Run tests
