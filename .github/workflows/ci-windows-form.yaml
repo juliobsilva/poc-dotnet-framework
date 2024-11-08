@@ -15,17 +15,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install NuGet dependencies
-        run: nuget restore WindowsFormsApp/WindowsFormsApp.sln
+        run: nuget restore WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj
 
       - name: Locate MSBuild
         id: locate-msbuild
         run: |
-          echo "::set-output name=path::$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
+          $msbuildPath = $(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
+          echo "msbuildPath=$msbuildPath" >> $GITHUB_OUTPUT
 
       - name: Build solution
         run: |
           $msbuild = '${{ steps.locate-msbuild.outputs.path }}'
-          & "$msbuild" 'WindowsFormsApp/WindowsFormsApp.sln' /p:Configuration=Release
+          & "$msbuild" 'WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj' /p:Configuration=Release
 
       - name: Run tests
         run: |
