@@ -17,6 +17,16 @@ jobs:
       - name: Install NuGet dependencies
         run: nuget restore WindowsFormsApp/WindowsFormsApp.sln
 
+      - name: Locate MSBuild
+        id: locate-msbuild
+        run: |
+          echo "::set-output name=path::$(vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
+
+      - name: Build solution
+        run: |
+          $msbuild = '${{ steps.locate-msbuild.outputs.path }}'
+          & "$msbuild" 'WindowsFormsApp/WindowsFormsApp.sln' /p:Configuration=Release
+
       - name: Build solution
         run: msbuild WindowsFormsApp/WindowsFormsApp.sln /p:Configuration=Release
 
