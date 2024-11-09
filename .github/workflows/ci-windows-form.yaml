@@ -26,7 +26,7 @@ jobs:
       - name: Build solution
         run: |
           $msbuild = "${{ steps.locate-msbuild.outputs.msbuildPath }}"
-          & "$msbuild" 'WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj' /p:Configuration=Release
+          & "$msbuild" 'WindowsFormsApp/WindowsFormsApp.Tests/WindowsFormsApp.Tests.csproj' /p:Configuration=Release
 
       - name: Locate VSTest
         id: locate-vstest
