@@ -20,13 +20,13 @@ jobs:
       - name: Locate MSBuild
         id: locate-msbuild
         run: |
-          $msbuildPath = (vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
-          echo "msbuildPath=$msbuildPath" >> $GITHUB_OUTPUT
+          $msbuildPath = (vswhere -latest -products * -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\MSBuild.exe')
+          "msbuildPath=$msbuildPath" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
       - name: Build solution
         run: |
           $msbuild = "${{ steps.locate-msbuild.outputs.msbuildPath }}"
-          echo $msbuild
+          Write-Output $msbuild
 
     #   - name: Run tests
     #     run: |
