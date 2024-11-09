@@ -35,10 +35,10 @@ jobs:
             "vstestpath=$vstestpath" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
       - name: Run tests
-          run: |
+        run: |
           $vstest = '${{ steps.locate-vstest.outputs.vstestpath }}'
           & "$vstest" **/*.Tests.dll --logger:trx
-          continue-on-error: true
+        continue-on-error: true
 
       - name: Publish artifact
         uses: actions/upload-artifact@v4
