@@ -34,10 +34,10 @@ jobs:
             $vstestpath = (vswhere -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools.Core -find Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe)"
             "vstestpath=$vstestpath" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
-        - name: Run tests
+      - name: Run tests
           run: |
-            $vstest = '${{ steps.locate-vstest.outputs.vstestpath }}'
-            & "$vstest" **/*.Tests.dll --logger:trx
+          $vstest = '${{ steps.locate-vstest.outputs.vstestpath }}'
+          & "$vstest" **/*.Tests.dll --logger:trx
           continue-on-error: true
 
       - name: Publish artifact
