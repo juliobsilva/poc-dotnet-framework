@@ -28,10 +28,17 @@ jobs:
           $msbuild = "${{ steps.locate-msbuild.outputs.msbuildPath }}"
           & "$msbuild" 'WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj' /p:Configuration=Release
 
-    #   - name: Run tests
-    #     run: |
-    #       vstest.console.exe **/*.Tests.dll --logger:trx
-    #     continue-on-error: true
+      - name: Locate VSTest
+        id: locate-vstest
+        run: |
+            $vstestpath = (vswhere -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools.Core -find Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe)"
+            "vstestpath=$vstestpath" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
+
+        - name: Run tests
+          run: |
+            $vstest = '${{ steps.locate-vstest.outputs.vstestpath }}'
+            & "$vstest" **/*.Tests.dll --logger:trx
+          continue-on-error: true
 
       - name: Publish artifact
         uses: actions/upload-artifact@v4
