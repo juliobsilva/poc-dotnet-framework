@@ -58,7 +58,7 @@ jobs:
         with:
           artifacts: '**/bin/Release/*'
           token: ${{ secrets.TOKEN_GENERIC }}
-          tag: ${{ github.ref }}
-          name: Release ${{ github.ref }}
+          tag: v1.0.0
+          name: Release-v1.0.0
           draft: false
           prerelease: false
