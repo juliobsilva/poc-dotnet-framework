@@ -46,3 +46,13 @@ jobs:
           name: WindowsFormsApp
           path: '**/bin/Release/*'
 
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: WindowsFormsApp
+          
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget push **/*.nupkg --source "github" --api-key ${{ secrets.TOKEN_GENERIC }}
+        env:
+          TOKEN_GENERIC: ${{ secrets.TOKEN_GENERIC }}      
