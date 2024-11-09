@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: |
           $vstest = '${{ steps.locate-vstest.outputs.vstestpath }}'
-          & "$vstest" **/*.Tests.dll --logger:trx
+          & "$vstest" WindowsFormsApp.Tests/bin/Release/*.Tests.dll --logger:trx
         continue-on-error: true
 
       - name: Publish artifact
