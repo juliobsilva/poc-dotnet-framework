@@ -58,8 +58,8 @@ jobs:
         with:
           artifacts: '**/bin/Release/*'
           token: ${{ secrets.TOKEN_GENERIC }}
-          tag: v1.0.0
-          name: Release-v1.0.0
+          tag: v1.1.0
+          name: Release-v1.1.0
           draft: false
           prerelease: false
 
