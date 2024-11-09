@@ -31,7 +31,7 @@ jobs:
       - name: Locate VSTest
         id: locate-vstest
         run: |
-            $vstestpath = (vswhere -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools.Core -find Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe)"
+            $vstestpath = (vswhere -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools.Core -find Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe)
             "vstestpath=$vstestpath" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
       - name: Run tests
