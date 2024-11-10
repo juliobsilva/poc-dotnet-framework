@@ -50,6 +50,11 @@ jobs:
       - name: pack the project
         run: nuget pack WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj -Properties Configuration=Release -OutputDirectory ./nupkgs
 
+      - name: Publish to GitHub Packages
+      run: |
+        dotnet nuget push ./nupkgs/*.nupkg \
+          --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+          --api-key "${{ secrets.TOKEN_GENERIC }}"
 
       - name: Download artifact
         uses: actions/download-artifact@v4
