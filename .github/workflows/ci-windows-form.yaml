@@ -1,4 +1,3 @@
-# .github/workflows/dotnet-windows-build.yml
 name: Build .NET Framework Windows Forms App
 
 on:
