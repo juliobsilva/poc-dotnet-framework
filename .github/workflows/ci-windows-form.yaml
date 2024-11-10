@@ -52,7 +52,8 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: |
-          dotnet nuget push ./nupkgs/*.nupkg --source "https://nuget.pkg.github.com/juliobsilva/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
+          PACKAGE_PATH=$(find ./nupkgs -name "*.nupkg")
+          dotnet nuget push $PACKAGE_PATH --source "https://nuget.pkg.github.com/juliobsilva/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
 
       - name: Download artifact
         uses: actions/download-artifact@v4
