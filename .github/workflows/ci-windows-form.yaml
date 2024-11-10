@@ -48,7 +48,8 @@ jobs:
           path: '**/bin/Release/*'
 
       - name: pack the project
-        run: dotnet pack WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj -c Release -o ./nupkgs
+        run: nuget pack WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj -Properties Configuration=Release -OutputDirectory ./nupkgs
+
 
       - name: Download artifact
         uses: actions/download-artifact@v4

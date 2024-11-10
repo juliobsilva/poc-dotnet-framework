@@ -12,6 +12,13 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>WindowsFormsApp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>juliobsilva</Authors>
+    <Description>Pacote npk</Description>
+
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
