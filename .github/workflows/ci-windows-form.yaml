@@ -1,7 +1,7 @@
 name: Build .NET Framework Windows Forms App
 
 on:
-  Workflow_dispatch:
+  workflow_dispatch:
     inputs:
       project-name:
         description: 'Project name'
