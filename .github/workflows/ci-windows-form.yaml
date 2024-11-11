@@ -58,7 +58,6 @@ jobs:
 
       - name: Generate NuGet package
         run: |
-          dotnet build WindowsFormsApp/WindowsFormsApp/WindowsFormsApp.csproj -c Release
           nuget pack ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.nuspec -Properties Configuration=Release -OutputDirectory ./nupkgs
 
       - name: Publish to GitHub Packages
