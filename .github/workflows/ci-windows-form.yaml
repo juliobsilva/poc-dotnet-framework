@@ -6,6 +6,14 @@ on:
       project-name:
         description: 'Project name'
         required: true
+      package-type:
+        type: choice
+        description: 'Package type'
+        options:
+          - artifact
+          - nuget        
+        required: true
+        default: 'artifact'
       
 
 jobs:
@@ -51,6 +59,7 @@ jobs:
         continue-on-error: true
 
       - name: Publish artifact
+        if: ${{ inputs.package-type == 'artifact' }}
         uses: actions/upload-artifact@v4
         with:
           name: WindowsFormsApp
@@ -58,10 +67,12 @@ jobs:
           retention-days: 7
 
       - name: Generate NuGet package
+        if: ${{ inputs.package-type == 'nuget' }}
         run: |
           nuget pack ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.csproj -Properties Configuration=Release -OutputDirectory ./nupkgs -Version 1.3.0
 
       - name: Publish to GitHub NuGet package
+        if: ${{ inputs.package-type == 'nuget' }}
         run: |
           $packageDirectory = "D:\a\${{ steps.get_repo_name.outputs.repoName }}\${{ steps.get_repo_name.outputs.repoName }}\nupkgs\"
           dotnet nuget push $packageDirectory --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
