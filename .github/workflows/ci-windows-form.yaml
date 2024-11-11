@@ -68,6 +68,7 @@ jobs:
           retention-days: 7
 
       - name: Download artifact
+        if: ${{ inputs.package-type == 'artifact' }}
         uses: actions/download-artifact@v4
         with:
           name: WindowsFormsApp
