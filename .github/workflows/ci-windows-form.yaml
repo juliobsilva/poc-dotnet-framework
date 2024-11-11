@@ -59,9 +59,9 @@ jobs:
 
       - name: Generate NuGet package
         run: |
-          nuget pack ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.nuspec -Properties Configuration=Release -OutputDirectory ./nupkgs
+          nuget pack ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.csproj -Properties Configuration=Release -OutputDirectory ./nupkgs -Version 1.3.0
 
-      - name: Publish to GitHub Packages
+      - name: Publish to GitHub NuGet package
         run: |
           $packageDirectory = "D:\a\${{ steps.get_repo_name.outputs.repoName }}\${{ steps.get_repo_name.outputs.repoName }}\nupkgs\"
           dotnet nuget push $packageDirectory --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
