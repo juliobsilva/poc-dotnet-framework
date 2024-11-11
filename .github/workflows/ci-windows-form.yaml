@@ -18,6 +18,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Pegar nome do repositório
+        id: get_repo_name
+        run: |
+          $repoName = $Env:GITHUB_REPOSITORY.Split('/')[1]
+          Write-Host "O nome do repositório é: $repoName"
+
       - name: Install NuGet dependencies
         run: nuget restore ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.csproj
 
@@ -55,7 +61,7 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: |
-          $packageDirectory = "D:\a\${{ github.repository }}\${{ github.repository }}\nupkgs\"
+          $packageDirectory = "D:\a\$GITHUB_\${{ github.repository }}\nupkgs\"
           dotnet nuget push $packageDirectory/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
 
       - name: Download artifact
