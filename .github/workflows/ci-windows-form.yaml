@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get repository name
-        id: get_repo_name
+        id: get-repo-name
         run: |
           $repoName = $Env:GITHUB_REPOSITORY.Split('/')[1]
           "repoName=$repoName" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
@@ -59,6 +59,7 @@ jobs:
         continue-on-error: true
 
       - name: Publish artifact
+        id: artifact-name
         if: ${{ inputs.package-type == 'artifact' }}
         uses: actions/upload-artifact@v4
         with:
@@ -69,7 +70,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.project-name }}
+          name: WindowsFormsApp
 
       - name: Generate NuGet package
         if: ${{ inputs.package-type == 'nuget' }}
@@ -79,7 +80,7 @@ jobs:
       - name: Publish to GitHub NuGet package
         if: ${{ inputs.package-type == 'nuget' }}
         run: |
-          $packageDirectory = "D:\a\${{ steps.get_repo_name.outputs.repoName }}\${{ steps.get_repo_name.outputs.repoName }}\nupkgs\"
+          $packageDirectory = "D:\a\${{ steps.get-repo-name.outputs.repoName }}\${{ steps.get-repo-name.outputs.repoName }}\nupkgs\"
           dotnet nuget push $packageDirectory --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
 
       
