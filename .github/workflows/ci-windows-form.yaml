@@ -55,7 +55,7 @@ jobs:
         with:
           name: WindowsFormsApp
           path: '**/bin/Release/*'
-        retention-days: 7
+          retention-days: 7
 
       - name: Generate NuGet package
         run: |
