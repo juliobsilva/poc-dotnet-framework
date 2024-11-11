@@ -62,7 +62,7 @@ jobs:
       - name: Publish to GitHub Packages
         run: |
           $packageDirectory = "D:\a\${{ steps.get_repo_name.outputs.repoName }}\${{ steps.get_repo_name.outputs.repoName }}\nupkgs\"
-          dotnet nuget push $packageDirectory/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
+          dotnet nuget push $packageDirectory --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key "${{ secrets.TOKEN_GENERIC }}"
 
       - name: Download artifact
         uses: actions/download-artifact@v4
