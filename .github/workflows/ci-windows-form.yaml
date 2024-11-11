@@ -57,7 +57,7 @@ jobs:
           path: '**/bin/Release/*'
 
       - name: pack the project
-        run: nuget pack ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.csproj -Properties Configuration=Release -OutputDirectory ./nupkgs -Version 1.2.0
+        run: nuget pack ${{ inputs.project-name }}/${{ inputs.project-name }}/${{ inputs.project-name }}.nuspec -Properties Configuration=Release -OutputDirectory ./nupkgs -Version 1.2.0
 
       - name: Publish to GitHub Packages
         run: |
